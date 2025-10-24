@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>فروش UC پابجی موبایل | Rezzy</title>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600&display=swap');
+    body {
+        margin: 0;
+        font-family: 'Vazirmatn', sans-serif;
+        background: linear-gradient(135deg, #2b0040, #1a1a40, #000000);
+        color: #fff;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    nav {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 40px;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        z-index: 10;
+    }
+
+    nav .logo {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: #b26bff;
+        text-shadow: 0 0 10px #b26bff;
+    }
+
+    nav ul {
+        list-style: none;
+        display: flex;
+        gap: 25px;
+        margin: 0;
+        padding: 0;
+    }
+
+    nav ul li a {
+        text-decoration: none;
+        color: #fff;
+        transition: 0.3s;
+    }
+
+    nav ul li a:hover { color: #b26bff; }
+
+    section {
+        display: none;
+        flex: 1;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding-top: 100px;
+        flex-direction: column;
+    }
+
+    section.active { display: flex; }
+
+    h1, h2 { color: #ffd700; text-shadow: 0 0 10px #b26bff; }
+
+    .btn {
+        margin-top: 20px;
+        background: linear-gradient(45deg, #b26bff, #ffd700);
+        color: #000;
+        padding: 12px 30px;
+        border: none;
+        border-radius: 8px;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: 0.3s;
+        font-weight: bold;
+        box-shadow: 0 0 10px rgba(178,107,255,0.6);
+    }
+
+    .btn:hover { transform: scale(1.07); }
+
+    .uc-options {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+        margin-top: 20px;
+    }
+
+    .uc-item {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        padding: 20px;
+        width: 130px;
+        cursor: pointer;
+        transition: 0.3s;
+        border: 2px solid transparent;
+    }
+
+    .uc-item:hover {
+        transform: scale(1.05);
+        border-color: #b26bff;
+        box-shadow: 0 0 15px rgba(178,107,255,0.5);
+    }
+
+    .uc-item.selected {
+        border-color: #ffd700;
+        box-shadow: 0 0 20px rgba(255,215,0,0.6);
+    }
+
+    .tracking {
+        margin-top: 20px;
+        background: rgba(255,255,255,0.1);
+        padding: 15px;
+        border-radius: 8px;
+        display: none;
+    }
+
+    /* دکمه موزیک */
+    #musicControl {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: linear-gradient(45deg, #b26bff, #ffd700);
+        border: none;
+        border-radius: 50%;
+        width: 55px;
+        height: 55px;
+        color: #000;
+        font-size: 1.3rem;
+        cursor: pointer;
+        box-shadow: 0 0 10px rgba(178,107,255,0.6);
+    }
+</style>
+</head>
+<body>
+
+<nav>
+    <div class="logo">Rezzy UC</div>
+    <ul>
+        <li><a href="#" onclick="showPage('home')">خانه</a></li>
+        <li><a href="#" onclick="showPage('buy')">خرید UC</a></li>
+        <li><a href="#" onclick="showPage('support')">پشتیبانی</a></li>
+    </ul>
+</nav>
+
+<!-- موزیک پس‌زمینه -->
+<audio id="bgMusic" loop>
+    <source src="https://files.catbox.moe/ihq7y6.mp3" type="audio/mpeg">
+</audio>
+<button id="musicControl" onclick="toggleMusic()">🎵</button>
+
+<section id="home" class="active">
+    <h1>خرید UC پابجی موبایل</h1>
+    <p>بهترین قیمت و سریع‌ترین تحویل از تیم Rezzy 🎮</p>
+    <button class="btn" onclick="startExperience()">شروع خرید</button>
+</section>
+
+<section id="buy">
+    <h2>انتخاب تعداد UC</h2>
+    <div class="uc-options" id="ucList">
+        <div class="uc-item" data-amount="60" data-price="35,000">💠 60 UC<br><small>۳۵,۰۰۰ تومان</small></div>
+        <div class="uc-item" data-amount="325" data-price="170,000">💠 325 UC<br><small>۱۷۰,۰۰۰ تومان</small></div>
+        <div class="uc-item" data-amount="660" data-price="320,000">💠 660 UC<br><small>۳۲۰,۰۰۰ تومان</small></div>
+        <div class="uc-item" data-amount="1800" data-price="820,000">💠 1800 UC<br><small>۸۲۰,۰۰۰ تومان</small></div>
+        <div class="uc-item" data-amount="3850" data-price="1,650,000">💠 3850 UC<br><small>۱,۶۵۰,۰۰۰ تومان</small></div>
+    </div>
+
+    <form id="ucForm" style="margin-top:25px;">
+        <input type="text" id="name" placeholder="نام داخل بازی" required>
+        <input type="text" id="playerId" placeholder="آیدی پابجی موبایل" required>
+        <button type="submit" class="btn">ثبت سفارش</button>
+    </form>
+
+    <div class="tracking" id="trackingBox">
+        <p>✅ سفارش شما با موفقیت ثبت شد</p>
+        <p>کد پیگیری:</p>
+        <h3 id="trackingCode" style="color:#b26bff;"></h3>
+        <button class="btn" onclick="showPage('home')">بازگشت به خانه</button>
+    </div>
+</section>
+
+<section id="support">
+    <h2>پشتیبانی Rezzy</h2>
+    <p>برای پشتیبانی با آیدی <b style="color:#b26bff;">@RezzySupport</b> در تلگرام تماس بگیرید 💬</p>
+    <button class="btn" onclick="showPage('home')">بازگشت به خانه</button>
+</section>
+
+<script>
+let bgMusic = document.getElementById('bgMusic');
+let musicPlaying = false;
+
+function startExperience(){
+    showPage('buy');
+    playMusic();
+}
+
+function toggleMusic(){
+    if(musicPlaying){
+        bgMusic.pause();
+        musicPlaying = false;
+    } else {
+        bgMusic.play();
+        musicPlaying = true;
+    }
+}
+
+function playMusic(){
+    bgMusic.play().then(()=>{ musicPlaying = true; }).catch(()=>{});
+}
+
+function showPage(id){
+    document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    window.scrollTo(0,0);
+}
+
+let selectedUC = null;
+document.querySelectorAll('.uc-item').forEach(item=>{
+    item.addEventListener('click', ()=>{
+        document.querySelectorAll('.uc-item').forEach(i=>i.classList.remove('selected'));
+        item.classList.add('selected');
+        selectedUC = item.dataset.amount + " UC (" + item.dataset.price + " تومان)";
+    });
+});
+
+const form = document.getElementById('ucForm');
+const trackingBox = document.getElementById('trackingBox');
+const trackingCodeEl = document.getElementById('trackingCode');
+
+form.addEventListener('submit', e=>{
+    e.preventDefault();
+    const name = document.getElementById('name').value.trim();
+    const playerId = document.getElementById('playerId').value.trim();
+    if(!name || !playerId){
+        alert("لطفاً همه فیلدها را پر کنید.");
+        return;
+    }
+    if(!selectedUC){
+        alert("لطفاً تعداد UC را انتخاب کنید.");
+        return;
+    }
+
+    const code = 'UC-' + Math.random().toString(36).substring(2,8).toUpperCase();
+    trackingCodeEl.textContent = code;
+    trackingBox.style.display = 'block';
+    form.style.display = 'none';
+    document.querySelector('.uc-options').style.display = 'none';
+});
+</script>
+
+</body>
+</html>
